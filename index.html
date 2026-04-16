@@ -4,81 +4,280 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steady Health — Body Intelligence from Your Apple Watch</title>
-    <meta name="description" content="Steady turns your Apple Watch data into actionable health insights. Circadian scheduling, illness detection, recovery tracking, and more — all on-device, fully private.">
+    <meta name="description" content="Steady reads your Apple Watch signals and turns them into a daily health score, personalised circadian schedule, and early illness detection. On-device. Fully private.">
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
+
+    <!-- Ambient aurora background -->
+    <div class="aurora" aria-hidden="true">
+        <div class="aurora-blob a1"></div>
+        <div class="aurora-blob a2"></div>
+        <div class="aurora-blob a3"></div>
+    </div>
+
     <nav>
         <div class="nav-inner">
-            <a href="/" class="logo">Steady Health</a>
+            <a href="/" class="logo">
+                <svg class="logo-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="9" stroke="#00C9A7" stroke-width="1.5"/>
+                    <circle cx="10" cy="10" r="5" fill="#00C9A7" opacity="0.3"/>
+                    <circle cx="10" cy="10" r="2.5" fill="#00C9A7"/>
+                </svg>
+                Steady
+            </a>
             <div class="nav-links">
                 <a href="/privacy">Privacy</a>
-                <a href="/terms">Terms</a>
                 <a href="/support">Support</a>
+                <a href="https://apps.apple.com/app/steady-health/id6761733543" class="nav-cta">Download Free</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <section class="hero">
-            <div class="hero-badge">Apple Watch + iPhone</div>
-            <h1>Your body intelligence,<br>always on your wrist.</h1>
-            <p class="hero-sub">Steady reads your Apple Watch signals — heart rate, HRV, sleep, temperature — and turns them into a daily health confidence score, personalised circadian schedule, and early illness detection. All processing happens on your device. Your data never leaves.</p>
-            <a href="https://apps.apple.com/app/steady-health/id6761733543" class="cta">Download on the App Store</a>
-        </section>
 
-        <section class="features">
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">&#x1F4CA;</div>
-                    <h3>Health Confidence Score</h3>
-                    <p>A single 0-100 number that tells you how your body is doing today, built from 6+ biometric signals weighted against your personal baseline.</p>
+        <!-- ─── HERO ─── -->
+        <section class="hero">
+            <div class="hero-badge">
+                <span class="badge-pulse"></span>
+                Apple Watch · iPhone · watchOS
+            </div>
+
+            <h1>Your body,<br><span class="gradient-text">intelligently read.</span></h1>
+
+            <p class="hero-sub">
+                Steady reads your Apple Watch signals — heart rate, HRV, sleep, temperature — and turns them into a daily health score, personalised circadian schedule, and early illness detection. All on your device. Your data never leaves.
+            </p>
+
+            <div class="hero-actions">
+                <a href="https://apps.apple.com/app/steady-health/id6761733543" class="cta">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download on the App Store
+                </a>
+                <span class="hero-meta">Free · iPhone + Apple Watch required</span>
+            </div>
+
+            <!-- Animated Energy Orb -->
+            <div class="orb-wrap" aria-hidden="true">
+                <svg class="orb-svg" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer dashed ring -->
+                    <circle class="ring-outer" cx="160" cy="160" r="148" stroke="#00C9A7" stroke-width="1" stroke-dasharray="6 10" opacity="0.25"/>
+                    <!-- Mid ring -->
+                    <circle class="ring-mid" cx="160" cy="160" r="120" stroke="#00C9A7" stroke-width="1" opacity="0.15"/>
+                    <!-- Glow ring -->
+                    <circle class="ring-glow" cx="160" cy="160" r="90" stroke="#00C9A7" stroke-width="16" opacity="0.06"/>
+                    <!-- Inner solid ring -->
+                    <circle class="ring-inner" cx="160" cy="160" r="78" stroke="#00C9A7" stroke-width="1.5" opacity="0.4"/>
+                    <!-- Core -->
+                    <circle cx="160" cy="160" r="64" fill="#00C9A7" opacity="0.08"/>
+                    <circle cx="160" cy="160" r="50" fill="#00C9A7" opacity="0.12"/>
+                    <!-- Score markers -->
+                    <circle class="marker" cx="160" cy="82" r="3.5" fill="#00C9A7" opacity="0.7"/>
+                    <circle class="marker" cx="237" cy="207" r="3.5" fill="#00C9A7" opacity="0.5"/>
+                    <circle class="marker" cx="83" cy="207" r="3.5" fill="#00C9A7" opacity="0.5"/>
+                </svg>
+                <div class="orb-center">
+                    <div class="orb-score" id="heroScore">0</div>
+                    <div class="orb-label">Health Score</div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#x23F0;</div>
-                    <h3>Circadian Schedule</h3>
-                    <p>Know exactly when to do deep work, exercise, and wind down — based on the two-process circadian model adapted to your sleep patterns.</p>
+            </div>
+
+            <!-- Live score strip -->
+            <div class="score-strip">
+                <div class="score-chip">
+                    <span class="chip-val" data-target="87">0</span>
+                    <span class="chip-label">Health</span>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#x1F6E1;</div>
-                    <h3>Illness Radar</h3>
-                    <p>Detects when your signals deviate from baseline in patterns consistent with oncoming illness — often before you feel symptoms.</p>
+                <div class="chip-sep"></div>
+                <div class="score-chip">
+                    <span class="chip-val" data-target="74">0</span>
+                    <span class="chip-label">Recovery</span>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#x1F4AA;</div>
-                    <h3>Strain &amp; Recovery</h3>
-                    <p>Banister TRIMP-based strain scoring from workouts. Recovery tracking from HRV, sleep quality, and resting heart rate trends.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#x1F319;</div>
-                    <h3>Sleep Intelligence</h3>
-                    <p>Sleep score, sleep debt tracking, stage analysis, consistency scoring, and environment monitoring. Know why you wake up tired.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">&#x1F512;</div>
-                    <h3>Fully Private</h3>
-                    <p>Zero servers. Zero analytics. Zero tracking. All data stays on your device (or syncs via your personal iCloud). We literally cannot see your data.</p>
+                <div class="chip-sep"></div>
+                <div class="score-chip">
+                    <span class="chip-val" data-target="82">0</span>
+                    <span class="chip-label">Sleep</span>
                 </div>
             </div>
         </section>
 
-        <section class="science">
-            <h2>Backed by 48+ peer-reviewed studies</h2>
-            <p>Every algorithm in Steady cites its source. From the Borbely two-process model (1982) for circadian rhythm, to Tanaka (2001) for max heart rate estimation, to Ekelund (2019) for sedentary thresholds. No black boxes.</p>
+        <!-- ─── TICKER ─── -->
+        <div class="ticker-wrap" aria-hidden="true">
+            <div class="ticker-track">
+                <span>Heart Rate</span><span class="dot">·</span>
+                <span>HRV</span><span class="dot">·</span>
+                <span>Sleep Stages</span><span class="dot">·</span>
+                <span>Resting HR</span><span class="dot">·</span>
+                <span>Wrist Temperature</span><span class="dot">·</span>
+                <span>SpO₂</span><span class="dot">·</span>
+                <span>Respiratory Rate</span><span class="dot">·</span>
+                <span>Active Energy</span><span class="dot">·</span>
+                <span>Step Count</span><span class="dot">·</span>
+                <span>Workout Strain</span><span class="dot">·</span>
+                <span>Sleep Debt</span><span class="dot">·</span>
+                <span>Heart Rate</span><span class="dot">·</span>
+                <span>HRV</span><span class="dot">·</span>
+                <span>Sleep Stages</span><span class="dot">·</span>
+                <span>Resting HR</span><span class="dot">·</span>
+                <span>Wrist Temperature</span><span class="dot">·</span>
+                <span>SpO₂</span><span class="dot">·</span>
+                <span>Respiratory Rate</span><span class="dot">·</span>
+                <span>Active Energy</span><span class="dot">·</span>
+                <span>Step Count</span><span class="dot">·</span>
+                <span>Workout Strain</span><span class="dot">·</span>
+                <span>Sleep Debt</span><span class="dot">·</span>
+            </div>
+        </div>
+
+        <!-- ─── FEATURES ─── -->
+        <section class="features">
+            <div class="section-eyebrow reveal">What Steady does</div>
+            <h2 class="section-title reveal">Six engines.<br>One clear picture.</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card reveal" style="--delay:0ms">
+                    <div class="ficon ficon-teal">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>Health Confidence Score</h3>
+                    <p>A single 0–100 score built from 6+ biometric signals, weighted against your personal 90-day baseline. Know how your body is actually doing today.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay:60ms">
+                    <div class="ficon ficon-purple">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <h3>Circadian Schedule</h3>
+                    <p>Know exactly when to do deep work, exercise, and wind down — from the two-process model adapted to your actual sleep patterns, not generic advice.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay:120ms">
+                    <div class="ficon ficon-red">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Illness Radar</h3>
+                    <p>Detects deviations from your baseline that match patterns of oncoming illness — often 24–48 hours before you feel symptoms.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay:0ms">
+                    <div class="ficon ficon-orange">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3>Strain &amp; Recovery</h3>
+                    <p>Banister TRIMP-based strain scoring from every workout. Recovery from HRV, sleep quality, and resting HR trends. Know when to push and when to rest.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay:60ms">
+                    <div class="ficon ficon-blue">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </div>
+                    <h3>Sleep Intelligence</h3>
+                    <p>Sleep score, debt tracking, stage analysis, consistency scoring, and environment monitoring. Find out exactly why you wake up tired.</p>
+                </div>
+
+                <div class="feature-card reveal" style="--delay:120ms">
+                    <div class="ficon ficon-teal">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h3>Zero-Server Privacy</h3>
+                    <p>No backend. No analytics. No ads. All processing happens on your iPhone. Your data syncs only through your personal iCloud — we literally cannot see it.</p>
+                </div>
+            </div>
         </section>
+
+        <!-- ─── HOW IT WORKS ─── -->
+        <section class="how">
+            <div class="section-eyebrow reveal">How it works</div>
+            <h2 class="section-title reveal">Three steps. Every morning.</h2>
+
+            <div class="steps">
+                <div class="step reveal">
+                    <div class="step-num">01</div>
+                    <div class="step-body">
+                        <h3>Watch collects overnight</h3>
+                        <p>While you sleep, Apple Watch captures HRV, sleep stages, wrist temperature, resting heart rate, SpO₂, and respiratory rate.</p>
+                    </div>
+                </div>
+                <div class="step-line" aria-hidden="true"></div>
+                <div class="step reveal">
+                    <div class="step-num">02</div>
+                    <div class="step-body">
+                        <h3>Steady processes on-device</h3>
+                        <p>Six independent engines run against your personal baseline. No cloud round-trip. No latency. No privacy trade-off.</p>
+                    </div>
+                </div>
+                <div class="step-line" aria-hidden="true"></div>
+                <div class="step reveal">
+                    <div class="step-num">03</div>
+                    <div class="step-body">
+                        <h3>You get a complete picture</h3>
+                        <p>Health score, recovery state, illness risk, your circadian schedule for today, and personalised coaching — before your first coffee.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── STATS ─── -->
+        <section class="stats">
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <div class="stat-num"><span class="countup" data-target="48">0</span>+</div>
+                    <div class="stat-label">Peer-reviewed studies</div>
+                </div>
+                <div class="stat-card reveal" style="--delay:80ms">
+                    <div class="stat-num"><span class="countup" data-target="6">0</span></div>
+                    <div class="stat-label">Biometric signals</div>
+                </div>
+                <div class="stat-card reveal" style="--delay:160ms">
+                    <div class="stat-num"><span class="countup" data-target="90">0</span>d</div>
+                    <div class="stat-label">Rolling baseline</div>
+                </div>
+                <div class="stat-card reveal" style="--delay:240ms">
+                    <div class="stat-num">0<span class="stat-small">kb</span></div>
+                    <div class="stat-label">Data sent to servers</div>
+                </div>
+            </div>
+            <p class="stats-copy reveal">Every algorithm cites its source — from the Borbély two-process model (1982) for circadian rhythm, to Tanaka (2001) for max heart rate, to Ekelund (2019) for sedentary thresholds. No black boxes.</p>
+        </section>
+
+        <!-- ─── PRIVACY ─── -->
+        <section class="privacy-block reveal">
+            <div class="privacy-card">
+                <div class="privacy-shield" aria-hidden="true">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00C9A7" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h2>Your health data is yours. Always.</h2>
+                <p>Zero servers. Zero analytics. Zero ads. Zero exceptions. Steady processes everything locally on your iPhone. Your data syncs only through your personal iCloud account — end-to-end encrypted, never accessible to us.</p>
+                <a href="/privacy" class="privacy-link">Read the privacy policy →</a>
+            </div>
+        </section>
+
+        <!-- ─── FINAL CTA ─── -->
+        <section class="final-cta">
+            <h2 class="reveal">Start understanding your body.</h2>
+            <p class="reveal">Free to download. No account required. Apple Watch + iPhone.</p>
+            <a href="https://apps.apple.com/app/steady-health/id6761733543" class="cta cta-large reveal">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                Download Steady — Free
+            </a>
+        </section>
+
     </main>
 
     <footer>
         <div class="footer-inner">
+            <a href="/" class="logo">Steady</a>
             <div class="footer-links">
                 <a href="/privacy">Privacy Policy</a>
                 <a href="/terms">Terms of Use</a>
                 <a href="/support">Support</a>
             </div>
             <p class="copyright">&copy; 2026 Steady Health. All rights reserved.</p>
-            <p class="contact">support@steady-health.app</p>
+            <p class="contact"><a href="mailto:support@steady-health.app">support@steady-health.app</a></p>
         </div>
     </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
